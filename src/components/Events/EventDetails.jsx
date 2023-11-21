@@ -90,7 +90,7 @@ export default function EventDetails() {
           <img src={`http://localhost:3000/${data.image}`} alt={data.title} />
           <div id="event-details-info">
             <div>
-              <p id="event-details-location">{data.locatin}</p>
+              <p id="event-details-location">{data.location}</p>
               <time dateTime={`Todo-DateT$Todo-Time`}>
                 {formattedDate} @ {data.time}
               </time>
