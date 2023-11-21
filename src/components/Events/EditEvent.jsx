@@ -3,7 +3,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 
 import Modal from "../UI/Modal.jsx";
 import EventForm from "./EventForm.jsx";
-import LoadingIndicator from "../UI/LoadingIndicator.jsx";
+// import LoadingIndicator from "../UI/LoadingIndicator.jsx";
 import { fetchEvent, queryClient, updateEvent } from "../../util/http.js";
 import ErrorBlock from "../UI/ErrorBlock.jsx";
 
@@ -46,13 +46,13 @@ export default function EditEvent() {
 
   let content;
 
-  if (isPending) {
-    content = (
-      <div className="center">
-        <LoadingIndicator />
-      </div>
-    );
-  }
+  // if (isPending) {
+  //   content = (
+  //     <div className="center">
+  //       <LoadingIndicator />
+  //     </div>
+  //   );
+  // }
 
   if (isError) {
     content = (
@@ -87,4 +87,11 @@ export default function EditEvent() {
   }
 
   return <Modal onClose={handleClose}>{content}</Modal>;
+}
+
+export function loader({ params }) {
+  return queryClient.fetchQuery({
+    queryKey: ["events", params.id],
+    queryFn: ({ signal }) => fetchEvent({ signal, id: params.id }),
+  });
 }
